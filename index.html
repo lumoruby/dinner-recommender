@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>저녁 메뉴 추천</title>
+  <title data-lang="title">저녁 메뉴 추천</title>
   <link href='style.css' rel='stylesheet'>
 </head>
 <body>
+  <div class="lang-switcher">
+    <button id="lang-ko">한국어</button>
+    <button id="lang-en">English</button>
+  </div>
   <div id="app">
-    <h1>오늘 저녁 뭐 먹지?</h1>
-    <p class="description">버튼을 눌러 저녁 메뉴를 추천받으세요!</p>
+    <h1 data-lang="headline">오늘 저녁 뭐 먹지?</h1>
+    <p class="description" data-lang="description">버튼을 눌러 저녁 메뉴를 추천받으세요!</p>
     <div class="card">
-      <button id="recommendButton">메뉴 추천받기</button>
+      <button id="recommendButton" data-lang="button">메뉴 추천받기</button>
       <p id="menu"></p>
     </div>
   </div>
