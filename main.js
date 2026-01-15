@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const recommendButton = document.getElementById('recommendButton');
   const menuDisplay = document.getElementById('menu');
+  const menuImage = document.getElementById('menuImage');
   const langKoButton = document.getElementById('lang-ko');
   const langEnButton = document.getElementById('lang-en');
 
@@ -12,9 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
       button: "메뉴 추천받기",
       thinking: "고민중...",
       menus: [
-        "치킨", "피자", "삼겹살", "된장찌개", "김치찌개",
-        "족발", "보쌈", "파스타", "스테이크", "초밥",
-        "라멘", "떡볶이", "햄버거", "부대찌개", "곱창"
+        { name: "치킨", image: "images/chicken.png" },
+        { name: "피자", image: "images/pizza.png" },
+        { name: "삼겹살", image: "images/samgyeopsal.png" },
+        { name: "된장찌개", image: "images/doenjang-jjigae.png" },
+        { name: "김치찌개", image: "images/kimchi-jjigae.png" },
+        { name: "족발", image: "images/jokbal.png" },
+        { name: "보쌈", image: "images/bossam.png" },
+        { name: "파스타", image: "images/pasta.png" },
+        { name: "스테이크", image: "images/steak.png" },
+        { name: "초밥", image: "images/sushi.png" },
+        { name: "라멘", image: "images/ramen.png" },
+        { name: "떡볶이", image: "images/tteokbokki.png" },
+        { name: "햄버거", image: "images/hamburger.png" },
+        { name: "부대찌개", image: "images/budae-jjigae.png" },
+        { name: "곱창", image: "images/gopchang.png" }
       ]
     },
     en: {
@@ -24,9 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
       button: "Get Recommendation",
       thinking: "Thinking...",
       menus: [
-        "Chicken", "Pizza", "Pork Belly (Samgyeopsal)", "Soybean Paste Stew", "Kimchi Stew",
-        "Pig's Trotters (Jokbal)", "Boiled Pork Wraps (Bossam)", "Pasta", "Steak", "Sushi",
-        "Ramen", "Spicy Rice Cakes (Tteokbokki)", "Hamburger", "Army Stew (Budae-jjigae)", "Grilled Intestines (Gopchang)"
+        { name: "Chicken", image: "images/chicken.png" },
+        { name: "Pizza", image: "images/pizza.png" },
+        { name: "Pork Belly (Samgyeopsal)", image: "images/samgyeopsal.png" },
+        { name: "Soybean Paste Stew", image: "images/doenjang-jjigae.png" },
+        { name: "Kimchi Stew", image: "images/kimchi-jjigae.png" },
+        { name: "Pig's Trotters (Jokbal)", image: "images/jokbal.png" },
+        { name: "Boiled Pork Wraps (Bossam)", image: "images/bossam.png" },
+        { name: "Pasta", image: "images/pasta.png" },
+        { name: "Steak", image: "images/steak.png" },
+        { name: "Sushi", image: "images/sushi.png" },
+        { name: "Ramen", image: "images/ramen.png" },
+        { name: "Spicy Rice Cakes (Tteokbokki)", image: "images/tteokbokki.png" },
+        { name: "Hamburger", image: "images/hamburger.png" },
+        { name: "Army Stew (Budae-jjigae)", image: "images/budae-jjigae.png" },
+        { name: "Grilled Intestines (Gopchang)", image: "images/gopchang.png" }
       ]
     }
   };
@@ -51,12 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
       langEnButton.classList.add('active');
       langKoButton.classList.remove('active');
     }
+    // Clear previous result when language changes
+    menuImage.style.display = 'none';
+    menuDisplay.textContent = '';
   }
 
   langKoButton.addEventListener('click', () => setLanguage('ko'));
   langEnButton.addEventListener('click', () => setLanguage('en'));
 
   recommendButton.addEventListener('click', () => {
+    // Hide previous result
+    menuImage.style.display = 'none';
     menuDisplay.textContent = translations[currentLang].thinking;
     recommendButton.disabled = true;
 
@@ -64,7 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const menus = translations[currentLang].menus;
       const randomIndex = Math.floor(Math.random() * menus.length);
       const randomMenu = menus[randomIndex];
-      menuDisplay.textContent = randomMenu;
+      
+      menuDisplay.textContent = randomMenu.name;
+      menuImage.src = randomMenu.image;
+      menuImage.style.display = 'block';
+      
       recommendButton.disabled = false;
     }, 1500);
   });
